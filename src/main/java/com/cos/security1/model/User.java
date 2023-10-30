@@ -20,8 +20,8 @@ public class User {
     private String password;
     private String username;
     private String email;
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
+
+    private String role;
     @CreationTimestamp
     private Timestamp createDate;
 }

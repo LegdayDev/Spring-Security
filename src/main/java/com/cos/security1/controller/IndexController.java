@@ -1,7 +1,7 @@
 package com.cos.security1.controller;
 
+
 import com.cos.security1.model.User;
-import com.cos.security1.model.UserRole;
 import com.cos.security1.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ public class IndexController {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @GetMapping({"","/"})
+    @GetMapping("/")
     public String index(){
         return "index";
     }
@@ -49,14 +49,11 @@ public class IndexController {
     public String joinForm(){
         return "joinForm";
     }
-
-    @ResponseBody
     @PostMapping("/join")
     public String join(@ModelAttribute User user){
-        user.setRole(UserRole.ROLE_USER);
+        user.setRole("ROLE_USER");
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-
-        return "join";
+        return "redirect:/loginForm";
     }
 }
